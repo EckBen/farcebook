@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Farcebook: A Clone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <%= link_to posts_path, class: "navbar-item" do %>
+            <img class="header_icon" src="/assets/facebook_icon_40x40.png">
+            <span id="fb_logo">arcebook</span>
+          <% end %>
+
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div class="navbar-menu">
+          <div class="navbar-start">
+            <%= link_to posts_path, class: "navbar-item header-link" do %>
+              <%= fa_icon('home') %>
+            <% end %>
+
+            <%= link_to users_path, class: "navbar-item header-link" do %>
+              <%= fa_icon ("users") %>
+            <% end %>
+          </div>
+
+          <div class="navbar-end">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-arrowless">
+                <%= fa_icon('plus') %>
+              </a>
+
+              <div class="navbar-dropdown is-right">
+                <span class="navbar-item">Create:</span>
+                <hr class="navbar-divider">
+                <%= link_to "Post", new_post_path, class: "navbar-item" %>
+                
+                <%# Create and update route %>
+                <%= link_to "Picture", root_path, class: "navbar-item" %>
+              
+              </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-arrowless">
+                <%= fa_icon('bell') %>
+              </a>
+
+              <div class="navbar-dropdown is-right">
+                <span class="navbar-item">Notifications:</span>
+                <hr class="navbar-divider">
+
+                <%# Replace with generated list of friend requests %>
+                <a class="navbar-item">
+                  List of notifications
+                </a>
+                <a class="navbar-item">
+                  List of notifications
+                </a>
+
+              </div>
+            </div>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link is-arrowless">
+                <%= fa_icon('user-circle') %>
+              </a>
+
+              <div class="navbar-dropdown is-right">
+                <span class="navbar-item">Notifications:</span>
+                <hr class="navbar-divider">
+                <%= link_to "Edit Profile", edit_user_registration_path, class: "navbar-item" %>
+                <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "navbar-item" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    
+    <div class="contents">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    
+      <%= yield %>
+    </div>
+
+  </body>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
+    }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const notes = document.querySelectorAll('.notification');
+
+    // Check if there are any navbar burgers
+    if (notes.length > 0) {
+
+        // Add a click event on each of them
+        notes.forEach( el => {
+          setTimeout(() => {
+            el.remove()
+          }, 3000);
+        });
+      }
+
+    });
+  </script>
+</html>
