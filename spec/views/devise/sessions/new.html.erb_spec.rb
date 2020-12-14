@@ -7,7 +7,7 @@ RSpec.describe 'devise/sessions/new', type: :feature do
   
   it "successfully logs in with valid credentials" do
     within('.form-inputs') do
-      fill_in 'Email', with: 'test1@example.com'
+      fill_in 'Email', with: 'test2@example.com'
       fill_in 'Password', with: 'password123'
     end
     click_button 'Log in'

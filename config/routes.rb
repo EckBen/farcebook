@@ -4,12 +4,20 @@ Rails.application.routes.draw do
   # devise_scope :user do
   #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   # end
+  
+  devise_scope :user do
+    authenticated  do
+      root to: 'posts#index'
+    end
 
-  root "welcome#index"
+    unauthenticated do
+      root to: 'devise/sessions#new', as: 'unauthenticated_root'
+    end
+  end
+
+  # root "posts#index"
   resources :users, only: [:show, :index, :edit]
   resources :posts, only: [:index, :show, :new, :create]
-
-  get '/welcome', to: 'welcome#index', as: 'welcome'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

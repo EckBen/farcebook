@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Farcebook| A Clone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <header class="header"></header>
+
+    <div class="full-height">
+      <div class="devise-flashes">
+        <% if flash[:notice] %>
+          <div class="notification is-primary global-notification">
+            <p class="notice"><%= notice %></p>
+          </div>
+        <% end %>
+
+        <% if flash[:alert] %>
+          <div class="notification is-danger global-notification">
+            <p class="alert"><%= alert %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="main" class="devise-contents columns is-vcentered is-centered">
+        <div class="column is-half">
+          <div class="columns is-vcentered has-text-centered">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div id="footer-columns" class="columns is-vcentered">
+          <div class="column has-text-centered">
+            <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+              <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+            <% end %>
+          </div>
+          
+          <div class="column has-text-centered">
+            <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+              <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+            <% end %>
+          </div>
+        </div>
+        <br>
+        <p id="footnote">Farcebook &#169; 2020</p>
+        <p id="footnote-small">(Definitely not Facebook)</p>
+      </footer>
+    </div>
+  </body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    const notes = document.querySelectorAll('.notification');
+
+    if (notes.length > 0) {
+
+        notes.forEach( el => {
+          setTimeout(() => {
+            el.remove()
+          }, 3000);
+        });
+      }
+
+    });
+  </script>
+</html>

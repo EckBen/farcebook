@@ -40,4 +40,32 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def list_of_friends(status = false)
+    (status == "pending") ? true : false
+
+    friend_list = self.friendships.where(pending: status).map {|f| f.friend}
+
+    self.rec_friendships.where(pending: status).each do |friend|
+      friend_list.push(friend.user)
+    end
+
+    return friend_list.sort_by {|friend| friend.first_name}
+  end
+
+  def viewable_content
+    current_friends = self.list_of_friends.map {|f| f.id }
+    current_friends.push(self.id)
+    
+    content = TextPost.where(user_id: current_friends).to_a
+    pics_content = PicturePost.where(user_id: current_friends).to_a
+
+    content.concat pics_content
+
+    return (content.sort_by {|post| post.created_at}).reverse
+  end
+
+  def remember_me
+    (super == nil) ? true : super
+  end
 end

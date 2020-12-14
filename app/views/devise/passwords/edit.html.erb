@@ -1,27 +1,41 @@
-<h2>Change your password</h2>
+<div class="column">
+  <h1 class="title is-2">farcebook</h1>
+  <h2 class="subtitle is-4">Need to change your password?</h2>
+</div>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<div class="column">
+  <div id="form-container" class="box password-reset-box">
+    <h2 class="subtitle is-5">Change your password</h2>
 
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
+    <hr>
 
-  <div class="form-inputs">
-    <%= f.input :password,
-                label: "New password",
-                required: true,
-                autofocus: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                label: "Confirm your new password",
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+
+      <div class="form-inputs">
+        <%= f.input :password,
+                    label: false,
+                    placeholder: "New Password",
+                    required: true,
+                    autofocus: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+        <%= f.input :password_confirmation,
+                    label: false,
+                    placeholder: "New Password",
+                    required: true,
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+
+      <hr>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Change my password", class: "form-page-btns send-email" %>
+        <%= link_to 'Cancel', new_session_path(resource_name), class: "button form-page-btns cancel" %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

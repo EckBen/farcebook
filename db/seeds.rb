@@ -69,9 +69,18 @@ joanna = User.new(email: 'test7@example.com',
 joanna.skip_confirmation!
 joanna.save!
 
+jeffery = User.new(email: 'test8@example.com', 
+  password: 'password123',
+  password_confirmation: 'password123',
+  first_name: 'Jeffery',
+  last_name: 'Doe',
+  username: 'jefferyDoe')
+jeffery.skip_confirmation!
+jeffery.save!
+
 ###############################################################################################
 ## john will have:
-#     friendships with- jeb, joseph, jane
+#     friendships with- jeb, joseph, jane, jeffery
 #     text_posts- 2
 #     picture_posts- 2
 #     in their profile- full
@@ -153,6 +162,15 @@ jerry.friendships.create(friend_id: jesus.id, pending: false)
 ###############################################################################################
 
 # No action required
+
+###############################################################################################
+
+###############################################################################################
+## jeffery will have:
+#     friendship with- john
+###############################################################################################
+
+jeffery.friendships.create(friend_id: john.id, pending: false)
 
 ###############################################################################################
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Farcebook: A Clone</title>
+    <title>Farcebook| A Clone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -64,13 +64,10 @@
                 <span class="navbar-item">Notifications:</span>
                 <hr class="navbar-divider">
 
-                <%# Replace with generated list of friend requests %>
-                <a class="navbar-item">
-                  List of notifications
-                </a>
-                <a class="navbar-item">
-                  List of notifications
-                </a>
+                <% current_user.list_of_friends("pending").each do |request| %>
+                  <span class="navbar-item">Pending friend request from: <%= request.username %></span>
+                  <span>ACCEPT BTN</span>
+                <% end %>
 
               </div>
             </div>
@@ -80,8 +77,8 @@
                 <%= fa_icon('user-circle') %>
               </a>
 
-              <div class="navbar-dropdown is-right">
-                <span class="navbar-item">Notifications:</span>
+              <div id="user-menu" class="navbar-dropdown is-right">
+                <span class="navbar-item"><%= current_user.username %>:</span>
                 <hr class="navbar-divider">
                 <%= link_to "Edit Profile", edit_user_registration_path, class: "navbar-item" %>
                 <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "navbar-item" %>
@@ -92,11 +89,21 @@
       </nav>
     </header>
 
-    
+    <div class="flashes">
+      <% if flash[:notice] %>
+        <div class="notification is-primary global-notification">
+          <p class="notice"><%= notice %></p>
+        </div>
+      <% end %>
+
+      <% if flash[:alert] %>
+        <div class="notification is-danger global-notification">
+          <p class="alert"><%= alert %></p>
+        </div>
+      <% end %>
+    </div>
+      
     <div class="contents">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    
       <%= yield %>
     </div>
 
@@ -131,13 +138,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-    // Get all "navbar-burger" elements
     const notes = document.querySelectorAll('.notification');
 
-    // Check if there are any navbar burgers
     if (notes.length > 0) {
 
-        // Add a click event on each of them
         notes.forEach( el => {
           setTimeout(() => {
             el.remove()

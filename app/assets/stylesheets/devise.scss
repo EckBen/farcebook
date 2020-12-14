@@ -1,0 +1,177 @@
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(144,148,155) !important;
+  opacity: 1; /* Firefox */
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin: 0px !important;
+  height: 385px;
+  background-color: white !important;
+  padding-bottom: 0px !important;
+  color: #8a8d91 !important;
+}
+
+footer > div > div > a {
+  color: #8a8d91 !important;
+}
+
+footer > div > div > a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  background-color: rgb(229,231,233) !important;
+  border: none !important;
+  height: 1px !important;
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+html, body {
+  height: 100%;
+  min-height: 900px;
+}
+
+.form-nav {
+  color: rgb(24,119,242) !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  line-height: 18px;
+  font-size: 14px !important;
+}
+
+.form-nav:hover {
+  text-decoration: underline !important;
+}
+
+.full-height {
+  height: 100%;
+  width: 100%;
+  min-height: 900px;
+  position: relative;
+  background-color: rgb(240,242,245);
+}    
+
+.header {
+  background-color: #29487d;
+  height: 44px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.input {
+  padding: 14px 16px 14px 16px !important;
+  font-size: 17px !important;
+  height: 50px !important;
+  line-height: 16px !important;
+  border-radius: 6px !important;
+}
+
+.login {
+  background-color: rgb(22,111,229) !important;
+  width: 100% !important;
+}
+
+.form-page-btns {
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.new-user {
+  height: 420px !important;
+}
+
+.new-user > .form-inputs > .field > .control > input {
+  padding: 14px 16px 14px 16px !important;
+  font-size: 17px !important;
+  height: 50px !important;
+  line-height: 16px !important;
+  border-radius: 6px !important;
+}
+
+.new-user > form > div > div > div > input, .new-user > form > div > div > div > div > input {
+  background-color: rgb(245,246,247) !important;
+}
+
+.new-user-submit {
+  padding-top: 10px !important;
+}
+
+.other-opts {
+  background-color: rgb(66, 183, 42) !important;
+}
+
+.email-resend-box {
+  height: 230px !important;
+}
+
+.password-reset-box {
+  height: 280px !important;
+}
+
+.send-email {
+  background-color: rgb(22,111,229) !important;
+  width: 60% !important;
+}
+
+.cancel {
+  background-color:rgb(189, 191, 194) !important;
+  width: 25% !important;
+  margin-left: 10px;
+}
+
+.title {
+  color: rgb(23,119,242) !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+#first-last > div {
+  float: left;
+  width: 50%;
+}
+
+#first-last > div.field.string.required.user_first_name {
+  padding-right: 10px;
+}
+
+#footer-columns {
+  height: 85%;
+}
+
+#footnote {
+  font-size: 14px;
+}
+
+#footnote-small {
+  font-size: 10px;
+}
+
+#form-container {
+  max-width: 400px;
+  height: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1) !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+#form-container > .login {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+#main {
+  padding-bottom: 385px;
+  padding-top: 44px;
+  height: 100%;
+}
