@@ -4,7 +4,7 @@
 </div>
 
 <div class="column">
-  <div id="form-container" class="box email-resend-box">
+  <div id="form-container" class="box unlock-email-resend-box">
     <h2 class="subtitle is-5">Resend unlock instructions</h2>
     
     <hr>
@@ -25,7 +25,7 @@
       <hr>
 
       <div class="form-actions">
-        <%= f.button :submit, "Resend unlock email", class: "form-page-btns send-email" %>
+        <%= f.button :submit, "Resend email", class: "form-page-btns send-email" %>
         <%= link_to 'Cancel', new_session_path(resource_name), class: "button form-page-btns cancel" %>
       </div>
     <% end %>

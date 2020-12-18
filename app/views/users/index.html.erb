@@ -1,38 +1,64 @@
-<p id="notice"><%= notice %></p>
+<div class="columns is-centered">
+  <div class="column is-half">
+    <div class="box">
+      <div id="title-wrap">
+        <h2 class="title is-3">Add People You Know</h2>
+      </div>
+    
+      <% @users.each do |user| %>
+        <div class="single-user">
+          <%= link_to user_path(user), class: "person-info" do %>
+            <div class="user-link">
+              <div class="info-wrapper">
+                <% if user.profile && user.profile.profile_pic_url %>
+                  <img src="<%= user.profile.profile_pic_url %>" alt="" class="thumbnail">
+                <% else %>
+                  <img src="/assets/no_profile_pic_60x60.png" alt="" class="thumbnail">
+                <% end %>
+    
+                <div class="person-info-text">
+                  <div>
+                    <span><%= user.first_name %></span>
+                    <span><%= user.last_name %></span>
+                  </div>
+                  <div>(<%= user.username %>)</div>
+                </div>
+              </div>
+            </div>
+          <% end %>
 
-<h1>Users listed here</h1>
+          <div class="link-wrapper">
+            <% if @current_friends.include? user %>
+              <div class="button user-index-page-btns already-friend"><%= fa_icon('check-circle') %>Already Friends</div>
+              <div>
+                <%= link_to "Delete friendship?", friendship_path(user), method: :delete, class: "button user-index-page-btns delete-friendship" %>
+              </div>
+            <% elsif @pending_friends.include? user %>
+              <div class="button user-index-page-btns pending-friend">Pending Friendship</div>
+            <% else %>
+              <div>
+                <%= link_to "Send Request", friendships_path(:user => {id: user.id}), method: :post, class: "button user-index-page-btns add-friend" %>
+              </div>
+            <% end %>
+          </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.password %></td>
-        <td><%= link_to 'Show', user %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if user_signed_in? %>
-  <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Sign In', new_user_session_path %> | 
-  <%= link_to 'Sign Up', new_user_registration_path %>
+<% if false %>
+<%= link_to user_path(user), class: "column is-one-quarter all-user-right-col" do %> 
+  <% if @current_friends.include? user %>
+    <div class="button form-page-btns already-friend"><%= fa_icon('check-circle') %>Already Friends</div>
+    <%= link_to "Delete friendship?", friendship_path(user), method: :delete, class: "button form-page-btns delete-friendship" %>
+  <% elsif @pending_friends.include? user %>
+    <div class="button form-page-btns already-friend">Pending Friendship</div>
+  <% else %>
+    <div class="column is-one-quarter all-user-right-col link-wrapper">
+      <%= link_to "Send Request", friendships_path(:user => {id: user.id}), method: :post, class: "button form-page-btns add-friend" %>
+    </div>
+  <% end %>
+<% end %>
 <% end %>

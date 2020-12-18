@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport" />
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -14,10 +16,10 @@
   </head>
 
   <body>
-    <header class="header"></header>
-
     <div class="full-height">
-      <div class="devise-flashes">
+      <div class="header"></div>
+
+      <div class="flashes">
         <% if flash[:notice] %>
           <div class="notification is-primary global-notification">
             <p class="notice"><%= notice %></p>
@@ -31,15 +33,15 @@
         <% end %>
       </div>
 
-      <div id="main" class="devise-contents columns is-vcentered is-centered">
+      <div id="main" class="columns is-vcentered is-centered">
         <div class="column is-half">
-          <div class="columns is-vcentered has-text-centered">
+          <div id="main-content" class="columns is-vcentered has-text-centered">
             <%= yield %>
           </div>
         </div>
       </div>
 
-      <footer class="footer">
+      <footer>
         <div id="footer-columns" class="columns is-vcentered">
           <div class="column has-text-centered">
             <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -53,15 +55,17 @@
             <% end %>
           </div>
         </div>
-        <br>
-        <p id="footnote">Farcebook &#169; 2020</p>
-        <p id="footnote-small">(Definitely not Facebook)</p>
+
+        <div id="footnote-wrapper">
+          <p id="footnote">Farcebook &#169; 2020</p>
+          <p id="footnote-small">(Definitely not Facebook)</p>
+        </div>
       </footer>
     </div>
   </body>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbolinks:load', () => {
 
     const notes = document.querySelectorAll('.notification');
 
@@ -69,8 +73,12 @@
 
         notes.forEach( el => {
           setTimeout(() => {
+            el.style.opacity = 0;
+          }, 2500);
+
+          setTimeout(() => {
             el.remove()
-          }, 3000);
+          }, 4500);
         });
       }
 

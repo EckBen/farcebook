@@ -4,7 +4,7 @@
 </div>
 
 <div class="column">
-  <div id="form-container" class="box email-resend-box">
+  <div id="form-container" class="box conf-email-resend-box">
     <h2 class="subtitle is-5">Resend confirmation instructions</h2>
     
     <hr>
@@ -26,7 +26,7 @@
       <hr>
 
       <div class="form-actions">
-        <%= f.button :submit, "Resend confirmation email", class: "form-page-btns send-email" %>
+        <%= f.button :submit, "Resend email", class: "form-page-btns send-email" %>
         <% if user_signed_in? %>
           <%= link_to 'Cancel', root_path, class: "button form-page-btns cancel" %>
         <% else %>

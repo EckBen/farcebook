@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport" />
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -16,18 +18,18 @@
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <%= link_to posts_path, class: "navbar-item" do %>
-            <img class="header_icon" src="/assets/facebook_icon_40x40.png">
+            <img class="header-icon" src="/assets/facebook_icon_40x40.png">
             <span id="fb_logo">arcebook</span>
           <% end %>
 
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-main">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
 
-        <div class="navbar-menu">
+        <div id="navbar-main" class="navbar-menu">
           <div class="navbar-start">
             <%= link_to posts_path, class: "navbar-item header-link" do %>
               <%= fa_icon('home') %>
@@ -39,18 +41,21 @@
           </div>
 
           <div class="navbar-end">
+            <div id="burger-only">
+              <%= link_to "Find friends", users_path, class: "navbar-item burger-only-link" %>
+            </div>
+
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link is-arrowless">
                 <%= fa_icon('plus') %>
               </a>
 
               <div class="navbar-dropdown is-right">
-                <span class="navbar-item">Create:</span>
+                <span class="navbar-item subtitle is-6">Create</span>
                 <hr class="navbar-divider">
-                <%= link_to "Post", new_post_path, class: "navbar-item" %>
+                <%= link_to "Post", new_post_path(:post => {type: "TextPost"}), class: "navbar-item" %>
                 
-                <%# Create and update route %>
-                <%= link_to "Picture", root_path, class: "navbar-item" %>
+                <%= link_to "Picture", new_post_path(:post => {type: "PicturePost"}), class: "navbar-item" %>
               
               </div>
             </div>
@@ -60,13 +65,26 @@
                 <%= fa_icon('bell') %>
               </a>
 
-              <div class="navbar-dropdown is-right">
-                <span class="navbar-item">Notifications:</span>
+              <div id="notification-menu" class="navbar-dropdown is-right">
+                <span class="navbar-item subtitle is-6">Notifications</span>
                 <hr class="navbar-divider">
+                
+                <% if current_user.list_of_rec_requests.length > 0 %>
+                  <span class="note-type">Pending friend requests from: </span>
+                <% else %>
+                  <span class="note-type">No new notifications</span>
+                <% end %>
 
-                <% current_user.list_of_friends("pending").each do |request| %>
-                  <span class="navbar-item">Pending friend request from: <%= request.username %></span>
-                  <span>ACCEPT BTN</span>
+                <% current_user.list_of_rec_requests.each do |friend_request| %>
+                  <div class="notifications-list">
+                    <div class="notifications-request-sender">
+                      <%= link_to friend_request.user.username, user_path(friend_request.user_id) %>
+                    </div>
+
+                    <div class="notifications-request-btn">
+                      <%= link_to "Accept?", friendship_path(friend_request), method: :put, class: "button form-page-btns accept-request" %>
+                    </div>
+                  </div>
                 <% end %>
 
               </div>
@@ -78,7 +96,7 @@
               </a>
 
               <div id="user-menu" class="navbar-dropdown is-right">
-                <span class="navbar-item"><%= current_user.username %>:</span>
+                <span class="navbar-item subtitle is-6"><%= current_user.username %></span>
                 <hr class="navbar-divider">
                 <%= link_to "Edit Profile", edit_user_registration_path, class: "navbar-item" %>
                 <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "navbar-item" %>
@@ -110,7 +128,7 @@
   </body>
   
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbolinks:load', () => {
 
     // Get all "navbar-burger" elements
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -136,7 +154,7 @@
     });
   </script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbolinks:load', () => {
 
     const notes = document.querySelectorAll('.notification');
 
@@ -144,11 +162,34 @@
 
         notes.forEach( el => {
           setTimeout(() => {
+            el.style.opacity = 0;
+          }, 2500);
+
+          setTimeout(() => {
             el.remove()
-          }, 3000);
+          }, 4500);
         });
       }
 
+    });
+  </script>
+  <script>
+    document.addEventListener('turbolinks:load', () => {
+
+    const $openers = Array.prototype.slice.call(document.querySelectorAll('.opener'), 0);
+
+    if ($openers.length > 0) {
+
+      // Add a click event on each of them
+      $openers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          el.classList.add('hidden-content');
+          el.nextElementSibling.classList.remove('hidden-content');
+
+        });
+      });
+    }
     });
   </script>
 </html>

@@ -45,6 +45,7 @@
           <% if post.is_a?(TextPost) %>
             <p><%= post.user.username %></p>
             <p><%= post.post_body %></p>
+            <%= link_to "Show", post_path(id: post.id, type: post.class.name), class: "button" %>
           <% else %>
             <p><%= post.user.username %></p>
             
@@ -54,6 +55,10 @@
             <% if !post.picture_body.nil? %>
               <p><%= post.picture_body %></p>
             <% end %>
+
+            <%= link_to "Show", post_path(id: post.id, type: post.class.name), class: "button" %>
+
+
 
             <img src="<%= post.picture_url %>" alt="">
           <% end %>

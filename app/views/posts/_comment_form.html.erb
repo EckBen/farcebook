@@ -1,0 +1,14 @@
+<%= simple_form_for(@comment, url: comments_path, html: { method: :post }) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :comment_body,
+                required: true,
+                label: false,
+                input_html: { autocomplete: "comment_body", placeholder: 'Comment', rows: '5', class: "comment-input" }%>
+    <%= f.input :commentable_type, :as => :hidden, :input_html => { :value => @post.class.name }%>
+    <%= f.input :commentable_id, :as => :hidden, :input_html => { :value => @post.id }%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Submit", class: "comment-section-btn submit-comment" %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<div id="pic-post-container">
+  <% if @post.picture_title %>
+    <div id="pic-title-wrap">
+      <h1 class="title is-3 pic-title"><%= @post.picture_title %></h1>
+    </div>
+  <% end %>
+  
+  
+  <div id="pic-wrap">
+    <img src="<%= @post.picture_url %>" alt="" id="post-picture">
+  </div>
+  
+  <div id="pic-body-wrap">
+    <% if @post.picture_body %>
+      <p><%= @post.picture_body %></p>
+    <% end %>
+  </div>
+</div>

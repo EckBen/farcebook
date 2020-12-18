@@ -1,0 +1,64 @@
+<div class="create-post-wrapper">
+  <div id="form-container" class="box create-post-box">
+    <h2 id="create-post-title" class="subtitle is-3">Create a New Post</h2>
+  
+    <hr>
+  
+    <div id="post-form-wrapper">
+      <% if @type == "TextPost" %>
+        <div>
+          <%= render "textpost_form" %>
+        </div>
+  
+        <div class="hidden-content">
+          <%= render "picturepost_form" %>
+        </div>
+      <% else %>
+        <div class="hidden-content">
+          <%= render "textpost_form" %>
+        </div>
+  
+        <div>
+          <%= render "picturepost_form" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('turbolinks:load', () => {
+
+  const $switchers = Array.prototype.slice.call(document.querySelectorAll('.switcher'), 0);
+
+  if ($switchers.length > 0) {
+
+    // Add a click event on each of them
+    $switchers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        const post_wrapper = document.getElementById("post-form-wrapper");
+        var tppb = document.getElementById("text_post_post_body");
+        var pppb = document.getElementById("picture_post_picture_body");
+
+        post_wrapper.firstElementChild.classList.toggle("hidden-content");
+        post_wrapper.lastElementChild.classList.toggle('hidden-content');
+
+        if (el.classList.contains("add-pic")) {
+          pppb.value = tppb.value;
+        } else {
+          tppb.value = pppb.value;
+        }
+
+      });
+    });
+  }
+  });
+</script>
+
+
+
+
+
+

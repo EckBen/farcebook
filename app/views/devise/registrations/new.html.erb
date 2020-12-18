@@ -1,6 +1,6 @@
 <div class="column">
-  <h1 class="title is-2">Sign Up</h1>
-  <h2 class="subtitle is-4">It's quick and easy.</h2>
+  <h1 id="farcebook-title" class="title is-2">Sign Up</h1>
+  <h2 id="farcebook-subtitle" class="subtitle is-4">It's quick and easy.</h2>
 </div>
 
 <div class="column">
@@ -45,21 +45,21 @@
       <hr>
 
       <div class="form-actions">
-        <%= f.button :submit, "Sign up", class: "form-page-btns other-opts" %>
+        <%= f.button :submit, "Sign up", class: "form-page-btns other-opts sign-up-btn" %>
+        
+        <div id="sign-up-navs">
+          <%= link_to "Log in", new_session_path(resource_name), class: "form-nav" %>
+          
+          <br id="breaker">
+          <span id="divider">|</span>
+
+          <%- resource_class.omniauth_providers.each do |provider| %>
+            <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "form-nav" %><br />
+          <% end %>
+        </div>
       </div>
     <% end %>
 
-    <div class="columns">
-      <div class="column">
-        <%= link_to "Log in", new_session_path(resource_name), class: "form-nav" %><br />
-      </div>
-
-      <div class="column">
-        <%- resource_class.omniauth_providers.each do |provider| %>
-          <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "form-nav" %><br />
-        <% end %>
-      </div>
-    </div>
 
   </div>
 </div>

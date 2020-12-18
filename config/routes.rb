@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   # root "posts#index"
   resources :users, only: [:show, :index, :edit]
-  resources :posts, only: [:index, :show, :new, :create]
+  resources :posts, only: [:index, :show, :new, :create, :destroy]
+  resources :friendships, only: [:update, :create, :destroy]
+  resources :comments, only: [:update, :create, :destroy]
+  resources :likes, only: [:create, :destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

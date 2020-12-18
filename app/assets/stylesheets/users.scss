@@ -1,0 +1,170 @@
+.add-friend, .pending-friend {
+  margin-top: 20px;
+}
+
+.add-friend, .delete-friendship {
+  background-color: rgb(22,111,229) !important;
+  color: white !important;
+}
+
+.all-user-right-col {
+  text-align: right;
+  margin-right: 2%;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.already-friend {
+  margin-top: 4px;
+}
+
+.already-friend, .pending-friend {
+  background-color: rgb(216, 216, 216) !important;
+  color: rgb(106, 106, 106) !important;
+}
+
+.delete-friendship {
+  margin-top: 2px;
+}
+
+.link-wrapper {
+  position: absolute;
+  top: 6px;
+  right: 2%;
+  height: 100%;
+}
+
+.person-info {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.person-info-text {
+  height: 100%;
+  padding: 6px;
+}
+
+.profile-update-box {
+  min-width: 80%;
+  height: fit-content !important;
+  margin-bottom: 40px;
+}
+
+.profile-update-wrapper {
+  padding-bottom: 20px;
+}
+
+.right-gets-padded {
+  padding-left: 10px !important;
+}
+
+.single-user {
+  height: 82px;
+  border-radius: 10px;
+  position: relative;
+  padding: 6px 2%;
+  box-shadow: 0px 0px 4px rgba(23, 119, 242, 0.21);
+  margin-bottom: 10px;
+}
+
+.single-user:hover {
+  background-color: rgb(245, 241, 241);
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.two-field-lines {
+  height: 94px;
+}
+
+.two-field-lines > div {
+  float: left;
+  width: 50%;
+}
+
+.user-index-page-btns {
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  width: 150px !important;
+  height: 30px !important;
+}
+
+.user-link {
+  padding: 5px 0px 5px 0px;
+  height: 100%;
+}
+
+.user-list {
+  background-color: rgba(220,220,220, 0.9) !important;
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+#profile-update-title {
+  text-align: center;
+}
+
+#title-wrap {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#update-profile-action {
+  text-align: center;
+}
+
+@media screen and (max-width: 380px) {
+  .person-info-text {
+    display: inline-block;
+  }
+
+  .info-wrapper {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .link-wrapper {
+    top: 76px;
+    left: calc(48% - 70px);
+  }
+  .single-user {
+    height: 152px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile-update-box {
+    max-width: calc(100% - 30px) !important;
+    margin: 0px 15px !important;
+  }
+
+  .profile-update-wrapper {
+    padding-bottom: 15px;
+    margin-top: 10px;
+  }
+
+  .right-gets-padded {
+    padding-left: 0px !important;
+  }
+
+  .two-field-lines {
+    height: 188px;
+  }
+
+  .two-field-lines > div {
+    float: none;
+    width: 100%;
+  }
+}

@@ -1,0 +1,67 @@
+<div id="post-contents" class="box">
+  <% if @post.class.name == "PicturePost" %>
+    <%= render "picture_post" %>
+  <% else %>
+    <%= render "text_post" %>
+  <% end %>
+
+  <div class="columns is-gapless is-mobile bottom-bar">
+    <div class="column no-pad">
+      <hr class="post-side-hr">
+    </div>
+
+    <div id="post-like-btn-column" class="column no-pad">
+      <% if current_user.can_like(@post) %>
+        <%= link_to likes_path(:likes => {likeable_type: @post.class.name, likeable_id: @post.id}),
+                    class: "button like",
+                    id: "post-side-btn",
+                    method: :post do %>
+          <span><%= fa_icon("thumbs-up") %></span>
+          <span>Like</span>
+        <% end %>
+
+      <% elsif current_user.id == @post.user_id %>
+        <%= link_to fa_icon('trash'),
+                      post_path(:post => {id: @post.id, type: @post.class.name}),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      class: "trash-can" %>
+
+      <% else %>
+        <%= link_to like_path(:likes => {likeable_type: @post.class.name, likeable_id: @post.id}),
+                    class: "button already-liked",
+                    id: "post-side-btn",
+                    method: :delete do %>
+          <span><%= fa_icon("check-circle") %></span>
+          <span>Liked</span>
+        <% end %>
+      
+      <% end %>
+    </div>
+    
+    <div class="column no-pad">
+      <hr class="post-side-hr">
+    
+    </div>
+  </div>
+</div>
+
+<div id="spacer">
+  <div id="comment-contents" class="box">
+    <div id="comment-header" class="columns is-mobile is-centered">
+      <div class="column subtitle is-5 comment-header-label">
+        <span id="comment-count">Comments:</span>
+        <span><%= @post.comments.length %></span>
+      </div>
+      <div class="column subtitle is-5 comment-header-label">
+        <span id="likes-count">Likes:</span>
+        <span><%= @post.likes.count %></span>
+      </div>
+    </div>
+
+    <%= render partial: 'comment', collection: @post.comments %>
+    <br>
+    <%= render partial: 'comment_form' %>
+    
+  </div>
+</div>

@@ -3,24 +3,28 @@
   opacity: 1; /* Firefox */
 }
 
+body {
+  position: relative;
+}
+
 footer {
   position: absolute;
   width: 100%;
   bottom: 0;
   margin: 0px !important;
-  height: 385px;
+  height: calc(35vh - 44px);
   background-color: white !important;
   padding-bottom: 0px !important;
   color: #8a8d91 !important;
-}
+}  
 
 footer > div > div > a {
   color: #8a8d91 !important;
-}
+}  
 
 footer > div > div > a:hover {
   text-decoration: underline;
-}
+}  
 
 hr {
   background-color: rgb(229,231,233) !important;
@@ -28,11 +32,20 @@ hr {
   height: 1px !important;
   margin-top: 15px !important;
   margin-bottom: 15px !important;
+}  
+
+.cancel {
+  background-color:rgb(189, 191, 194) !important;
+  width: 25% !important;
+  margin-left: 10px;
 }
 
-html, body {
-  height: 100%;
-  min-height: 900px;
+.conf-email-resend-box {
+  height: 250px !important;
+}
+
+.email-resend-box, .unlock-email-resend-box {
+  height: 230px !important;
 }
 
 .form-nav {
@@ -46,20 +59,25 @@ html, body {
   text-decoration: underline !important;
 }
 
+.form-page-btns {
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
 .full-height {
-  height: 100%;
-  width: 100%;
-  min-height: 900px;
+  min-height: 100vh;
   position: relative;
   background-color: rgb(240,242,245);
-}    
+}
 
 .header {
   background-color: #29487d;
   height: 44px;
-  position: absolute;
   width: 100%;
-  top: 0;
 }
 
 .input {
@@ -73,15 +91,6 @@ html, body {
 .login {
   background-color: rgb(22,111,229) !important;
   width: 100% !important;
-}
-
-.form-page-btns {
-  color: white !important;
-  border: none !important;
-  border-radius: 6px !important;
-  font-family: Helvetica, Arial, sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
 }
 
 .new-user {
@@ -108,10 +117,6 @@ html, body {
   background-color: rgb(66, 183, 42) !important;
 }
 
-.email-resend-box {
-  height: 230px !important;
-}
-
 .password-reset-box {
   height: 280px !important;
 }
@@ -121,10 +126,10 @@ html, body {
   width: 60% !important;
 }
 
-.cancel {
-  background-color:rgb(189, 191, 194) !important;
-  width: 25% !important;
-  margin-left: 10px;
+.sign-up-btn {
+  float: left;
+  margin-top: 4px;
+  margin-left: 10%;
 }
 
 .title {
@@ -141,8 +146,13 @@ html, body {
   padding-right: 10px;
 }
 
+#divider {
+  display: none;
+}
+
 #footer-columns {
-  height: 85%;
+  height: 20vh;
+  margin: 0px;
 }
 
 #footnote {
@@ -151,6 +161,12 @@ html, body {
 
 #footnote-small {
   font-size: 10px;
+}
+
+#footnote-wrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
 
 #form-container {
@@ -171,7 +187,103 @@ html, body {
 }
 
 #main {
-  padding-bottom: 385px;
-  padding-top: 44px;
-  height: 100%;
+  margin: 0px;
+  height: 65vh;
+}
+
+#main-content {
+  min-width: 560px;
+}
+
+#sign-up-navs {
+  text-align: right;
+}
+
+@media screen and (max-width: 500px) {
+  #main-content {
+    min-width: 0px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  #breaker {
+    display: none;
+  }
+
+  #divider {
+    display: inline;
+  }
+}
+@media screen and (max-height: 700px) {
+  .input {
+    padding: 5px 16px !important;
+    height: 32px !important;
+  }
+
+  .new-user {
+    height: fit-content !important;
+  }
+}
+
+@media screen and (max-height: 733px), screen and (max-width: 768px) {
+  footer {
+    height: 60px;
+  }
+  
+  .header {
+    height: 15px;
+  }
+  
+  #farcebook-title {
+    font-size: 34px !important;
+  }
+  
+  #farcebook-subtitle {
+    font-size: 18px !important;
+  }
+  
+  #footer-columns {
+    height: 56px !important;
+    padding-top: 5px !important;
+  }
+
+  #footer-columns > .column {
+    padding: 2px !important;
+  }
+
+  #footnote-wrapper {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1270px) {
+  .new-user {
+    height: 510px !important;
+  }
+
+  .sign-up-btn {
+    float: none;
+    margin: 0px;
+  }
+
+  .unlock-email-resend-box {
+    min-width: 290px !important;
+  }
+
+  #first-last > div {
+    float: none;
+    width: 100%;
+  }
+  
+  #first-last > div.field.string.required.user_first_name {
+    padding-right: 0px;
+  }
+
+  #sign-up-navs {
+    text-align: center;
+  }
+
+  #user_last_name {
+    margin-bottom: 12px;
+  }
 }

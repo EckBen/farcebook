@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @current_friends = current_user.list_of_friends
+    @pending_friends = current_user.list_of_friends("pending")
   end
 
   # GET /users/1
@@ -14,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
   end
 
   private

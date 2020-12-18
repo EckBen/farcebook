@@ -90,7 +90,7 @@ jeffery.save!
 john.friendships.create(friend_id: jeb.id, pending: false)
 john.friendships.create(friend_id: jane.id, pending: false)
 
-# Pending friend request
+# Pending friend request to
 john.friendships.create(friend_id: joseph.id)
 
 john.text_posts.create(post_body: "John's first text post body. Lorem ipsum and all that.")
@@ -114,7 +114,15 @@ john.create_profile(profile_pic_url: "https://images.pexels.com/photos/3182747/p
 jeb.friendships.create(friend_id: joseph.id, pending: false)
 jeb.friendships.create(friend_id: jerry.id, pending: false)
 
-jeb.text_posts.create(post_body: "Jeb's first text post body. Lorem ipsum and all that.")
+jeb.text_posts.create(post_body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum ornare erat et sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu aliquam nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque porttitor in nulla et pretium. Nunc lacinia luctus est, ac elementum purus feugiat nec. Quisque molestie dolor quis commodo commodo. Nulla maximus enim eu mollis ullamcorper. Morbi rutrum nulla ex, et fringilla tortor ultrices ullamcorper. Sed est dolor, porta nec velit sit amet, porttitor lacinia risus. Duis ac ultricies est. Ut bibendum eget erat nec faucibus. Nulla pharetra, nisl id elementum auctor, neque libero vulputate augue, ut scelerisque nulla leo vel odio. Aliquam id neque vitae ante interdum congue. In hac habitasse platea dictumst. Quisque congue eu tortor non ullamcorper.
+
+  Sed est nunc, porta quis mi a, sollicitudin iaculis sem. Nulla sit amet efficitur turpis, nec varius massa. Aenean in luctus est. Duis fermentum ornare mi sit amet lacinia. Vivamus accumsan tempor ex sed eleifend. Pellentesque maximus, justo at semper sagittis, eros odio volutpat sapien, nec condimentum arcu leo non ex. Pellentesque molestie laoreet malesuada. Aenean id lacinia tellus. Donec arcu lorem, volutpat vitae ullamcorper sed, maximus in erat. Sed vestibulum semper nibh porta lobortis. Phasellus efficitur turpis sed risus pharetra sodales. Sed interdum purus id augue rutrum, a porta orci laoreet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla sollicitudin arcu nec orci hendrerit cursus. Curabitur pulvinar volutpat magna, id consequat enim commodo vitae. Mauris id varius orci.
+  
+  Maecenas cursus leo et volutpat aliquam. Nullam condimentum mi quis ante faucibus feugiat. Vivamus sed porttitor odio. Quisque tincidunt fermentum erat ac placerat. Nam at ante cursus nunc convallis consequat. Ut tincidunt lacinia vulputate. Sed ac nibh lorem. Praesent nec mattis leo, eu porttitor purus. Donec non lacus et elit mollis consectetur. Suspendisse potenti. Fusce volutpat aliquet nisi a dignissim.
+  
+  Aenean varius porttitor ex quis iaculis. Nulla fermentum rhoncus eros eu mollis. In quis sapien in ex bibendum sagittis at eu mauris. Pellentesque vitae diam arcu. Donec gravida nibh sed orci placerat, facilisis ultricies nisi accumsan. Nulla sed auctor turpis. Duis condimentum dolor leo, sit amet semper ante pellentesque sodales. Vivamus quis consectetur enim. Aenean felis lectus, pharetra ut nisi sed, dictum porttitor neque. Aliquam nec bibendum metus, in pharetra nibh.
+  
+  Morbi sagittis diam a quam volutpat feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum at mauris feugiat, accumsan tellus sed, egestas turpis. Quisque vel dignissim risus. Morbi aliquet mattis erat, eget pellentesque sem semper a. Suspendisse ut neque dolor. Sed ac nisl sapien.")
 
 jeb.picture_posts.create(picture_title: "The wonders of space.", picture_url: "https://images.pexels.com/photos/1257860/pexels-photo-1257860.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260")
 jeb.picture_posts.create(picture_body: "I have always wanted to visit a forest like this. With all of the moss everywhere it looks like it would be a super comfy place to take a nap.", picture_url: "https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=750&w=1260")
@@ -154,7 +162,8 @@ jerry.friendships.create(friend_id: jesus.id, pending: false)
 #     likes- all of the comments
 ###############################################################################################
 
-# No action required
+# Pending friend request to
+jesus.friendships.create(friend_id: john.id, pending: true)
 
 ###############################################################################################
 ## joanna will have:
@@ -189,7 +198,7 @@ jeb.comments.create(commentable_type: "PicturePost", commentable_id: john.pictur
 jeb.comments.create(commentable_type: "PicturePost", commentable_id: john.picture_posts.last.id, comment_body: "Stop taking selfies dude.")
 
 #     jane comments on- one of johns comments and pic_posts and one of jebs comments and pic_posts
-jane.comments.create(commentable_type: "PicturePost", commentable_id: jeb.picture_posts.last.id, comment_body: "That nebula is sus.")
+jane.comments.create(commentable_type: "PicturePost", commentable_id: jeb.picture_posts.first.id, comment_body: "That nebula is sus.")
 jane.comments.create(commentable_type: "PicturePost", commentable_id: john.picture_posts.last.id, comment_body: "Wattacutie")
 jane.comments.create(commentable_type: "Comment", commentable_id: jeb.comments.last.id, comment_body: "But he's a stud!")
 jane.comments.create(commentable_type: "Comment", commentable_id: john.comments.last.id, comment_body: "Wanna play Among Us?")

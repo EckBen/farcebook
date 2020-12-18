@@ -53,6 +53,10 @@ class User < ApplicationRecord
     return friend_list.sort_by {|friend| friend.first_name}
   end
 
+  def list_of_rec_requests
+    self.rec_friendships.where(pending: true).to_a
+  end
+
   def viewable_content
     current_friends = self.list_of_friends.map {|f| f.id }
     current_friends.push(self.id)
@@ -67,5 +71,15 @@ class User < ApplicationRecord
 
   def remember_me
     (super == nil) ? true : super
+  end
+
+  def can_like(likeable)
+    existing_like = Like.where("user_id = ? AND likeable_type = ? AND likeable_id = ?", self.id, likeable.class.name, likeable.id)
+
+    if !existing_like.empty? || likeable.user.id == self.id
+      return false
+    else
+      return true
+    end
   end
 end
