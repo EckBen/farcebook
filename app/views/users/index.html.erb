@@ -31,10 +31,13 @@
             <% if @current_friends.include? user %>
               <div class="button user-index-page-btns already-friend"><%= fa_icon('check-circle') %>Already Friends</div>
               <div>
-                <%= link_to "Delete friendship?", friendship_path(user), method: :delete, class: "button user-index-page-btns delete-friendship" %>
+                <%= link_to "Delete Friendship?", friendship_path(id: 0, :user => {id: user.id}), method: :delete, class: "button user-index-page-btns delete-friendship" %>
               </div>
             <% elsif @pending_friends.include? user %>
               <div class="button user-index-page-btns pending-friend">Pending Friendship</div>
+              <div>
+                <%= link_to "Cancel Request?", friendship_path(id: 0, :user => {id: user.id}), method: :delete, class: "button user-index-page-btns delete-friendship" %>
+              </div>
             <% else %>
               <div>
                 <%= link_to "Send Request", friendships_path(:user => {id: user.id}), method: :post, class: "button user-index-page-btns add-friend" %>

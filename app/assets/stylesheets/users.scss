@@ -1,4 +1,4 @@
-.add-friend, .pending-friend {
+.add-friend {
   margin-top: 20px;
 }
 
@@ -14,11 +14,8 @@
   padding-bottom: 0px !important;
 }
 
-.already-friend {
-  margin-top: 4px;
-}
-
 .already-friend, .pending-friend {
+  margin-top: 4px;
   background-color: rgb(216, 216, 216) !important;
   color: rgb(106, 106, 106) !important;
 }

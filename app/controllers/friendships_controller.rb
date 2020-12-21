@@ -22,7 +22,7 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friendship = Friendship.where("friend_id = ? AND user_id = ?", params[:id], current_user.id).or(Friendship.where("friend_id = ? AND user_id = ?", current_user.id, params[:id])).first
+    @friendship = Friendship.where("friend_id = ? AND user_id = ?", friendly_params[:id], current_user.id).or(Friendship.where("friend_id = ? AND user_id = ?", current_user.id, friendly_params[:id])).first
     @friendship.destroy
 
     redirect_to users_path, notice: 'Friendship was successfully destroyed.'

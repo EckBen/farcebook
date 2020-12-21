@@ -1,0 +1,16 @@
+<%= simple_form_for(@textpost, url: posts_path, html: { method: :post }) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :post_body,
+                required: true,
+                label: false,
+                placeholder: "What do you want to say?",
+                input_html: { autocomplete: "post_body", rows: '5', id: "main-page-body-input" }%>
+    <%= f.input :main, :as => :hidden, :input_html => { :value => true }%>
+  </div>
+
+  <div class="form-actions main-submit-wrapper">
+    <%= f.button :submit, "Submit", class: "submit-post" %>
+    <br class="separator">
+    <div class="switcher add-pic main-add"><%= link_to "Add Picture", new_post_path(:post => {type: "PicturePost"}) %></div>
+  </div>
+<% end %>

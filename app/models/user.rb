@@ -82,4 +82,21 @@ class User < ApplicationRecord
       return true
     end
   end
+
+  def unseen_likes_comments
+    my_comments = self.comments.map {|c| c.id }
+    my_text_posts = self.text_posts.map {|p| p.id}
+    my_pic_posts = self.picture_posts.map {|p| p.id}
+
+    # my_comments.concat my_text_posts
+    # my_comments.concat my_pic_posts
+    # my_comments
+
+    unseen_likes = Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "TextPost", my_text_posts).or(Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "PicturePost", my_pic_posts)).or(Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "Comment", my_comments))
+    unseen_comments = Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "TextPost", my_text_posts).or(Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "PicturePost", my_pic_posts)).or(Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "Comment", my_comments))
+
+    unseen_activity = unseen_likes.to_a + unseen_comments.to_a
+
+    return unseen_activity.sort_by { |a| a.created_at }
+  end
 end

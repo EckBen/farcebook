@@ -4,6 +4,8 @@ class PostsController < ApplicationController
   def index
     @posts = current_user.viewable_content
     @friends = current_user.list_of_friends
+    @textpost = current_user.text_posts.build
+    @comment = current_user.comments.build
   end
 
   def show
@@ -24,7 +26,7 @@ class PostsController < ApplicationController
 
   def create
     if params[:text_post]
-      @textpost = current_user.text_posts.build(text_params)
+      @textpost = current_user.text_posts.build(post_body: text_params[:post_body])
       @picturepost = current_user.picture_posts.build
       @type = "TextPost"
     else
@@ -34,7 +36,11 @@ class PostsController < ApplicationController
     end
 
     if @textpost.save
-      redirect_to post_path(id: @textpost.id, type: @textpost.class.name), notice: 'Post was successfully created.'
+      if (text_params[:main])
+        redirect_to root_path, notice: 'Post was successfully created.'
+      else
+        redirect_to post_path(id: @textpost.id, type: @textpost.class.name), notice: 'Post was successfully created.'
+      end
     elsif @picturepost.save
       redirect_to post_path(id: @picturepost.id, type: @picturepost.class.name), notice: 'Post was successfully created.'
     else
@@ -61,7 +67,7 @@ class PostsController < ApplicationController
   end
 
   def text_params
-    params.require(:text_post).permit(:post_body)
+    params.require(:text_post).permit(:post_body, :main)
   end
 
   def picture_params

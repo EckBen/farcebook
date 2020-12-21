@@ -16,6 +16,12 @@ class LikesController < ApplicationController
     redirect_to request.referrer, notice: 'Unliked successfully.'
   end
 
+  def update
+    @like = Like.find(params[:id])
+
+    @like.update(seen: true)
+  end
+
   private
 
   def likely_params

@@ -19,14 +19,12 @@
           <span><%= fa_icon("thumbs-up") %></span>
           <span>Like</span>
         <% end %>
-
       <% elsif current_user.id == @post.user_id %>
         <%= link_to fa_icon('trash'),
                       post_path(:post => {id: @post.id, type: @post.class.name}),
                       method: :delete,
                       data: { confirm: 'Are you sure?' },
                       class: "trash-can" %>
-
       <% else %>
         <%= link_to like_path(:likes => {likeable_type: @post.class.name, likeable_id: @post.id}),
                     class: "button already-liked",
@@ -35,13 +33,11 @@
           <span><%= fa_icon("check-circle") %></span>
           <span>Liked</span>
         <% end %>
-      
       <% end %>
     </div>
     
     <div class="column no-pad">
       <hr class="post-side-hr">
-    
     </div>
   </div>
 </div>
@@ -51,7 +47,7 @@
     <div id="comment-header" class="columns is-mobile is-centered">
       <div class="column subtitle is-5 comment-header-label">
         <span id="comment-count">Comments:</span>
-        <span><%= @post.comments.length %></span>
+        <span id="count"></span>
       </div>
       <div class="column subtitle is-5 comment-header-label">
         <span id="likes-count">Likes:</span>
@@ -65,3 +61,8 @@
     
   </div>
 </div>
+
+<script>
+  var count = document.querySelectorAll('.comment-container').length;
+  document.getElementById("count").innerHTML = count;
+</script>

@@ -68,25 +68,83 @@
               <div id="notification-menu" class="navbar-dropdown is-right">
                 <span class="navbar-item subtitle is-6">Notifications</span>
                 <hr class="navbar-divider">
+
+                <% friend_requests = current_user.list_of_rec_requests %>
                 
-                <% if current_user.list_of_rec_requests.length > 0 %>
-                  <span class="note-type">Pending friend requests from: </span>
+                <% if friend_requests.length > 0 %>
+                  <div class="note-type">Pending friend requests from: </div>
                 <% else %>
-                  <span class="note-type">No new notifications</span>
+                  <div class="note-type no-new">No new friend requests.</div>
                 <% end %>
 
-                <% current_user.list_of_rec_requests.each do |friend_request| %>
+                <% friend_requests.each do |friend_request| %>
                   <div class="notifications-list">
                     <div class="notifications-request-sender">
                       <%= link_to friend_request.user.username, user_path(friend_request.user_id) %>
                     </div>
 
                     <div class="notifications-request-btn">
-                      <%= link_to "Accept?", friendship_path(friend_request), method: :put, class: "button form-page-btns accept-request" %>
+                      <%= link_to "Accept", friendship_path(friend_request), method: :put, class: "button form-page-btns accept-request" %>
+                      <%= link_to "Decline", friendship_path(id: 0, :user => {id: friend_request.user_id}), method: :delete, class: "button form-page-btns decline-request" %>
                     </div>
                   </div>
                 <% end %>
 
+                <% unseen_content = current_user.unseen_likes_comments %>
+
+                <% if unseen_content.length > 0 %>
+                  <span class="note-type">Recent Activity: </span>
+                <% else %>
+                  <span class="note-type no-new">No new activity on your content.</span>
+                <% end %>
+
+                <% unseen_content.each do |activity| %>
+                  <div class="notifications-list">
+  
+                    <% if activity.class.name == "Comment" %>
+                      <%= link_to notifications_path(:activity => {id: activity.commentable_id, type: activity.commentable_type}) do %>  
+                        <div class="notifications-activity">
+                          <span class="notifications-username"><%= activity.user.username %></span>
+
+                          <% if activity.commentable_type == "TextPost" %>
+                            <span>has commented on your post.</span>
+  
+                          <% elsif activity.commentable_type == "PicturePost" %>
+                            <span>has commented on your post.</span>
+  
+                          <% elsif activity.commentable_type == "Comment" %>
+                            <span>has replied to your comment.</span>
+                          <% end %>
+                        </div>
+                      <% end %>
+
+                      <%= link_to comment_path(activity), method: :put, class: "dismiss" do %>
+                        <%= fa_icon('times') %>
+                      <% end %>
+  
+                    <% else %>
+                      <%= link_to notifications_path(:activity => {id: activity.likeable_id, type: activity.likeable_type}) do %>  
+                        <div class="notifications-activity">
+                          <span class="notifications-username"><%= activity.user.username %></span>
+
+                          <% if activity.likeable_type == "TextPost" %>
+                            <span>has liked your post.</span>
+  
+                          <% elsif activity.likeable_type == "PicturePost" %>
+                            <span>has liked your post.</span>
+                            
+                          <% elsif activity.likeable_type == "Comment" %>
+                            <span>has liked your comment.</span>
+                          <% end %>
+                        </div>
+                      <% end %>
+  
+                      <%= link_to like_path(activity), method: :put, class: "dismiss" do %>
+                        <%= fa_icon('times') %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
               </div>
             </div>
 
@@ -186,6 +244,26 @@
 
           el.classList.add('hidden-content');
           el.nextElementSibling.classList.remove('hidden-content');
+
+        });
+      });
+    }
+    });
+  </script>
+  <script>
+    document.addEventListener('turbolinks:load', () => {
+
+    const $dismissers = Array.prototype.slice.call(document.querySelectorAll('.dismiss'), 0);
+
+    if ($dismissers.length > 0) {
+
+      // Add a click event on each of them
+      $dismissers.forEach( el => {
+        el.addEventListener('click', () => {
+
+          setTimeout(() => {
+            el.parentNode.remove()
+          }, 500);
 
         });
       });

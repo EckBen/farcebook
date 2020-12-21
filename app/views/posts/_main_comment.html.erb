@@ -1,0 +1,67 @@
+<div class="comment-container">
+  <div class="comment-top">
+    <div class="comment-username">
+      <%= link_to main_comment.user.username, user_path(main_comment.user) %>
+
+      <% if current_user.id == main_comment.user_id %>
+        <%= link_to fa_icon('trash'),
+                    comment_path(id: 0, :comment => {id: main_comment.id}),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: "trash-can" %>
+      <% end %>
+
+    </div>
+
+    <div class="like-container">
+      <% unless current_user.id == main_comment.user_id%>
+        <% if current_user.can_like(main_comment) %>
+          <%= link_to likes_path(:likes => {likeable_type: main_comment.class.name, likeable_id: main_comment.id}),
+                      class: "button like comment-side-btn",
+                      method: :post do %>
+            <span><%= fa_icon("thumbs-up") %></span>
+            <span>Like</span>
+          <% end %>
+        <% else %>
+          <%= link_to like_path(id: 0, :likes => {likeable_type: main_comment.class.name, likeable_id: main_comment.id}),
+                      class: "button already-liked comment-side-btn",
+                      method: :delete do %>
+            <span><%= fa_icon("check-circle") %></span>
+            <span>Liked</span>
+          <% end %>
+        <% end %>
+      <% end %>
+      
+      <div class="comment-side-like">
+        <span id="thumb-up"><%= fa_icon("thumbs-up") %></span>
+        <span id="comment-like-count"><%= main_comment.likes.count %></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="comment-body">
+    <p><%= main_comment.comment_body %></p>
+  </div>
+
+  <div class="reply-comment">
+    <div class="opener">Reply</div>
+    
+    <div class="hidden-content">
+      <%= simple_form_for(@comment, url: comments_path, html: { method: :post }) do |f| %>
+        <div class="form-inputs reply-line">
+          <%= f.input_field :comment_body,
+                            placeholder: "Reply",
+                            label: false,
+                            rows: '1',
+                            class: "reply-field" %>
+          <%= f.input :commentable_type, :as => :hidden, :input_html => { :value => main_comment.class.name }%>
+          <%= f.input :commentable_id, :as => :hidden, :input_html => { :value => main_comment.id }%>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, "Reply", class: "comment-section-btn reply-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+</div>

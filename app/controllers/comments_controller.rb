@@ -10,15 +10,9 @@ class CommentsController < ApplicationController
   end
 
   def update
-    # @friendship = Friendship.find(params[:id])
+    @comment = Comment.find(params[:id])
 
-    # if @friendship.update(pending: false)
-    #   flash.notice = "You are now friends with #{@friendship.user.first_name}"
-    #   redirect_to user_path(@friendship.user_id)
-    # else
-    #   flash.alert = "Friendship could not be saved."
-    #   redirect_to root_path
-    # end
+    @comment.update(seen: true)
   end
 
   def destroy

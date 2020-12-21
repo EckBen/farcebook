@@ -1,80 +1,116 @@
-<div class="columns">
+<div class="columns main-page-cols">
   <div class="column">
-    <div class="container">
-      <aside class="menu">
-        <p class="menu-label">
-          General
-        </p>
-        <ul class="menu-list">
-          <li><a>Dashboard</a></li>
-          <li><a>Customers</a></li>
-        </ul>
-        <p class="menu-label">
-          Administration
-        </p>
-        <ul class="menu-list">
-          <li><a>Team Settings</a></li>
-          <li>
-            <a class="is-active">Manage Your Team</a>
-            <ul>
-              <li><a>Members</a></li>
-              <li><a>Plugins</a></li>
-              <li><a>Add a member</a></li>
-            </ul>
-          </li>
-          <li><a>Invitations</a></li>
-          <li><a>Cloud Storage Environment Settings</a></li>
-          <li><a>Authentication</a></li>
-        </ul>
-        <p class="menu-label">
-          Transactions
-        </p>
-        <ul class="menu-list">
-          <li><a>Payments</a></li>
-          <li><a>Transfers</a></li>
-          <li><a>Balance</a></li>
-        </ul>
-      </aside>
-    </div>
-  </div>
+    <div id="new-post-box" class="box">
+      <div id="main-post-heading">
+        <div id="create-post-header-wrapper">
+          <h2 class="subtitle is-5" id="create-new-post-subtitle">Create new post</h2>
+        </div>
 
-  <div class="column is-half">
-    <div class="container"">
+        <div id="line"></div>
+      </div>
+
+      <div id="new-post-btn-wrapper">
+        <%= render "main_page_form" %>
+      </div>
+    </div>
+    
+    <div id="newsfeed">
       <% @posts.each do |post| %>
-        <div>
-          <% if post.is_a?(TextPost) %>
-            <p><%= post.user.username %></p>
-            <p><%= post.post_body %></p>
-            <%= link_to "Show", post_path(id: post.id, type: post.class.name), class: "button" %>
-          <% else %>
-            <p><%= post.user.username %></p>
+        <div class="box single-post">
+          <div class="post-content">
+            <%= link_to post_path(id: post.id, type: post.class.name) do %>
+              <div>
+                <span class="username"><%= post.user.username %></span>
+                <span id="thumb-up"> | <%= fa_icon("thumbs-up") %></span>
+                <span id="comment-like-count"><%= post.likes.count %></span>
+              </div>
             
-            <% if !post.picture_title.nil? %>
-              <p><%= post.picture_title %></p>
+              <% if post.is_a?(TextPost) %>
+                    <p class="main-text-post"><%= post.post_body %></p>
+              <% else %>
+                  <div class="main-pic-post">
+                    <% if !post.picture_title.nil? %>
+                      <h2 class="subtitle is-6"><%= post.picture_title %></h2>
+                      <hr>
+                    <% end %>
+        
+                    <img class="main-pic" src="<%= post.picture_url %>" alt="">
+                    
+                    <% if !post.picture_body.nil? %>
+                      <hr>
+                      <p><%= post.picture_body %></p>
+                    <% end %>
+                  </div>
+              <% end %>
             <% end %>
-            <% if !post.picture_body.nil? %>
-              <p><%= post.picture_body %></p>
-            <% end %>
 
-            <%= link_to "Show", post_path(id: post.id, type: post.class.name), class: "button" %>
+            <div class="top-bar-btn">
+              <% if current_user.can_like(post) %>
+                <%= link_to likes_path(:likes => {likeable_type: post.class.name, likeable_id: post.id}),
+                            class: "button like",
+                            id: "post-side-btn",
+                            method: :post do %>
+                  <span><%= fa_icon("thumbs-up") %></span>
+                  <span>Like</span>
+                <% end %>
+              <% elsif current_user.id == post.user_id %>
+                <%= link_to fa_icon('trash'),
+                              post_path(id: 0, :post => {id: post.id, type: post.class.name}),
+                              method: :delete,
+                              data: { confirm: 'Are you sure?' },
+                              class: "trash-can" %>
+              <% else %>
+                <%= link_to like_path(id: 0, :likes => {likeable_type: post.class.name, likeable_id: post.id}),
+                            class: "button already-liked",
+                            id: "post-side-btn",
+                            method: :delete do %>
+                  <span><%= fa_icon("check-circle") %></span>
+                  <span>Liked</span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
 
-
-
-            <img src="<%= post.picture_url %>" alt="">
-          <% end %>
+          <div id="comment-contents">
+            <%= render partial: 'main_comment', collection: post.comments %>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="column">
-    <div class="container"">
-      <% @friends.each do |friend| %>
-        <div>
-          <span><%= friend.first_name %> <%= friend.last_name %></span>
-          <span>.    Friend Req Btn</span>
-        </div>
-      <% end %>
+  <div class="column is-one-quarter">
+    <div class="box friend-list-wrapper">
+      <div class="friend-list-header">
+        <h2 class="subtitle is-5" id="">Friend List</h2>
+        <hr>
+      </div>
+
+      <div class="friend-list">
+        <% @friends.each do |friend| %>
+          <div class="single-user">
+            <%= link_to user_path(friend), class: "person-info" do %>
+              <div class="user-link">
+                <div class="info-wrapper">
+                  <% if friend.profile && friend.profile.profile_pic_url %>
+                    <img src="<%= friend.profile.profile_pic_url %>" alt="" class="thumbnail">
+                  <% else %>
+                    <img src="/assets/no_profile_pic_60x60.png" alt="" class="thumbnail">
+                  <% end %>
+      
+                  <div class="person-info-text">
+                    <div>
+                      <span class="username"><%= friend.first_name %></span>
+                      <span class="username"><%= friend.last_name %></span>
+                    </div>
+                    <div class="username">(<%= friend.username %>)</div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
