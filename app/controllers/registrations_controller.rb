@@ -20,4 +20,11 @@ class RegistrationsController < Devise::RegistrationsController
                                     :profile_pic_url,
                                     :id])
     end
+
+    protected
+
+    def after_update_path_for(resource)
+      flash[:notice] = "Profile succesfully updated."
+      user_path(current_user)
+    end
 end

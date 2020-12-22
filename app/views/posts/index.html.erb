@@ -16,65 +16,7 @@
     
     <div id="newsfeed">
       <% @posts.each do |post| %>
-        <div class="box single-post">
-          <div class="post-content">
-            <%= link_to post_path(id: post.id, type: post.class.name) do %>
-              <div>
-                <span class="username"><%= post.user.username %></span>
-                <span id="thumb-up"> | <%= fa_icon("thumbs-up") %></span>
-                <span id="comment-like-count"><%= post.likes.count %></span>
-              </div>
-            
-              <% if post.is_a?(TextPost) %>
-                    <p class="main-text-post"><%= post.post_body %></p>
-              <% else %>
-                  <div class="main-pic-post">
-                    <% if !post.picture_title.nil? %>
-                      <h2 class="subtitle is-6"><%= post.picture_title %></h2>
-                      <hr>
-                    <% end %>
-        
-                    <img class="main-pic" src="<%= post.picture_url %>" alt="">
-                    
-                    <% if !post.picture_body.nil? %>
-                      <hr>
-                      <p><%= post.picture_body %></p>
-                    <% end %>
-                  </div>
-              <% end %>
-            <% end %>
-
-            <div class="top-bar-btn">
-              <% if current_user.can_like(post) %>
-                <%= link_to likes_path(:likes => {likeable_type: post.class.name, likeable_id: post.id}),
-                            class: "button like",
-                            id: "post-side-btn",
-                            method: :post do %>
-                  <span><%= fa_icon("thumbs-up") %></span>
-                  <span>Like</span>
-                <% end %>
-              <% elsif current_user.id == post.user_id %>
-                <%= link_to fa_icon('trash'),
-                              post_path(id: 0, :post => {id: post.id, type: post.class.name}),
-                              method: :delete,
-                              data: { confirm: 'Are you sure?' },
-                              class: "trash-can" %>
-              <% else %>
-                <%= link_to like_path(id: 0, :likes => {likeable_type: post.class.name, likeable_id: post.id}),
-                            class: "button already-liked",
-                            id: "post-side-btn",
-                            method: :delete do %>
-                  <span><%= fa_icon("check-circle") %></span>
-                  <span>Liked</span>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-
-          <div id="comment-contents">
-            <%= render partial: 'main_comment', collection: post.comments %>
-          </div>
-        </div>
+        <%= render partial: 'feed', locals: { post: post } %>
       <% end %>
     </div>
   </div>
@@ -88,7 +30,7 @@
 
       <div class="friend-list">
         <% @friends.each do |friend| %>
-          <div class="single-user">
+          <div class="single-user s-u-main">
             <%= link_to user_path(friend), class: "person-info" do %>
               <div class="user-link">
                 <div class="info-wrapper">

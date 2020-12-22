@@ -1,4 +1,4 @@
-<div class="columns is-centered">
+<div class="columns is-centered u-i-full">
   <div class="column is-half">
     <div class="box">
       <div id="title-wrap">
@@ -10,7 +10,7 @@
           <%= link_to user_path(user), class: "person-info" do %>
             <div class="user-link">
               <div class="info-wrapper">
-                <% if user.profile && user.profile.profile_pic_url %>
+                <% if user.profile && user.profile.profile_pic_url && user.profile.profile_pic_url != "" %>
                   <img src="<%= user.profile.profile_pic_url %>" alt="" class="thumbnail">
                 <% else %>
                   <img src="/assets/no_profile_pic_60x60.png" alt="" class="thumbnail">
@@ -50,18 +50,3 @@
     </div>
   </div>
 </div>
-
-<% if false %>
-<%= link_to user_path(user), class: "column is-one-quarter all-user-right-col" do %> 
-  <% if @current_friends.include? user %>
-    <div class="button form-page-btns already-friend"><%= fa_icon('check-circle') %>Already Friends</div>
-    <%= link_to "Delete friendship?", friendship_path(user), method: :delete, class: "button form-page-btns delete-friendship" %>
-  <% elsif @pending_friends.include? user %>
-    <div class="button form-page-btns already-friend">Pending Friendship</div>
-  <% else %>
-    <div class="column is-one-quarter all-user-right-col link-wrapper">
-      <%= link_to "Send Request", friendships_path(:user => {id: user.id}), method: :post, class: "button form-page-btns add-friend" %>
-    </div>
-  <% end %>
-<% end %>
-<% end %>

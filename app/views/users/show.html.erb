@@ -1,28 +1,87 @@
-<p id="notice"><%= notice %></p>
+<div class="profile-header">
+  <% if @user.profile && @user.profile.profile_pic_url && @user.profile.profile_pic_url != "" %>
+    <img src="<%= @user.profile.profile_pic_url %>" alt="" class="profile-picture">
+  <% else %>
+    <img src="/assets/no_profile_pic.png" alt="" class="profile-picture-missing">
+  <% end %>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+  <div class="profile-first-name">
+    <%= @user.first_name %>
+  </div>
+  <div class="profile-last-name">
+    <%= @user.last_name %>
+  </div>
+  <div class="profile-username">
+    <%= fa_icon("id-card") %>&nbsp;&nbsp;
+    <%= @user.username %>
+  </div>
+  <div class="profile-email">
+    <%= fa_icon("envelope") %>&nbsp;&nbsp;
+    <%= @user.email %>
+  </div>
+</div>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+<div class="box" id="profile-contents">
+  <div id="profile-info" class="columns">
+    <% if @user.profile %>
+      <% if @user.profile.city && @user.profile.state && @user.profile.city != "" && @user.profile.state != ""%>
+        <div class="column">
+          <strong>Location:</strong>
+          <%= @user.profile.city %>,
+          <%= @user.profile.state %>
+        </div>
+      <% elsif @user.profile.city && @user.profile.city != "" %>
+        <div class="column">
+          <strong>City:</strong>
+          <%= @user.profile.city %>
+        </div>
+      <% elsif @user.profile.state && @user.profile.state != "" %>
+        <div class="column">
+          <strong>State:</strong>
+          <%= @user.profile.state %>
+        </div>
+      <% end %>
+  
+      <% if @user.profile.job && @user.profile.job != "" %>
+        <div class="column">
+          <strong>Occupation:</strong>
+          <%= @user.profile.job %>
+        </div>
+      <% end %>
+  
+      <% if @user.profile.workplace && @user.profile.workplace != "" %>
+        <div class="column">
+          <strong>Works At:</strong>
+          <%= @user.profile.workplace %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="friend-request-btn" class="columns">
+    <% if @current_friends.include? @user %>
+      <div class="column">
+        <div class="button profile-btns already-friend"><%= fa_icon('check-circle') %>Already Friends</div>
+      </div>
+      <div class="column">
+        <%= link_to "Delete Friendship?", friendship_path(:user => {id: @user.id}), method: :delete, class: "button profile-btns delete-friendship" %>
+      </div>
+    <% elsif @pending_friends.include? @user %>
+      <div class="column">
+        <div class="button profile-btns pending-friend">Pending Friendship</div>
+      </div>
+      <div class="column">
+        <%= link_to "Cancel Request?", friendship_path(:user => {id: @user.id}), method: :delete, class: "button profile-btns delete-friendship" %>
+      </div>
+    <% elsif current_user != @user %>
+      <div class="column">
+        <%= link_to "Send Request", friendships_path(:user => {id: @user.id}), method: :post, class: "button profile-btns add-friend" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
-
-<%= link_to 'Back', users_path %>
+<div class="user-content">
+  <% @content.each do |item| %>
+    <%= render partial: '/posts/feed', locals: { post: item } %>
+  <% end %>
+</div>

@@ -19,8 +19,9 @@
           <%= f.input :first_name, required: false %>
           <%= f.input :last_name, required: false, wrapper_html: { class: "right-gets-padded" } %>
         </div>
-        
-        <%= f.simple_fields_for :profile do |p| %>
+
+        <% profile = (resource.profile) ? resource.profile : Profile.new %>
+        <%= f.simple_fields_for :profile, profile do |p| %>
           <div class="two-field-lines">
             <%= p.input :city,
                         placeholder: "City",
@@ -69,7 +70,7 @@
   
       <div id="update-profile-action" class="form-actions">
         <%= f.button :submit, "Update", class: "form-page-btns send-email" %>
-        <%= link_to "Back", :back, class: "button form-page-btns cancel" %>
+        <%= link_to "Cancel", root_path, class: "button form-page-btns cancel" %>
     
         <p>
           <%= link_to "Unhappy? Cancel my account",

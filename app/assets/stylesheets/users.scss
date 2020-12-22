@@ -20,6 +20,10 @@
   color: rgb(106, 106, 106) !important;
 }
 
+.already-friend:hover, .pending-friend:hover {
+  cursor: default !important;
+}
+
 .delete-friendship {
   margin-top: 2px;
 }
@@ -41,6 +45,70 @@
   padding: 6px;
 }
 
+.profile-btns {
+  border: none !important;
+  border-radius: 6px !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  width: 80% !important;
+  height: 30px !important;
+}
+
+.profile-email {
+  font-size: 40px;  
+  bottom: 0;
+  left: 80px;
+}
+
+.profile-first-name {
+  font-size: 70px;
+  bottom: 225px;
+  left: 20px;
+}
+
+.profile-first-name, .profile-last-name, .profile-username, .profile-email {
+  color: white !important;
+  font-weight: 600;
+  position: absolute;
+}
+
+.profile-header {
+  position: relative;
+  width: 90%;
+  height: 450px;
+  margin: 30px auto;
+  background-color: rgb(22,111,229) !important;
+  border-radius: 15px;
+  font-family: Helvetica, Arial, sans-serif !important;
+}
+
+.profile-last-name {
+  font-size: 70px;
+  bottom: 150px;
+  left: 80px;
+}
+
+.profile-picture {
+  max-height: 300px;
+  border-radius: 15px;
+  object-fit: contain;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  box-shadow: 13px 13px 11px rgb(7, 56, 117);
+}
+
+.profile-picture-missing {
+  max-height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  right: 30px;
+  top: -45px;
+  box-shadow: 13px 13px 10px #00000082;
+}
+
 .profile-update-box {
   min-width: 80%;
   height: fit-content !important;
@@ -49,6 +117,12 @@
 
 .profile-update-wrapper {
   padding-bottom: 20px;
+}
+
+.profile-username {
+  font-size: 50px;
+  bottom: 50px;
+  left: 20px;
 }
 
 .right-gets-padded {
@@ -85,6 +159,14 @@
   width: 50%;
 }
 
+.u-i-full {
+  padding-bottom: 40px;
+}
+
+.user-content {
+  padding-bottom: 5px;
+}
+
 .user-index-page-btns {
   border: none !important;
   border-radius: 6px !important;
@@ -107,6 +189,21 @@
   margin-right: auto;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
+}
+
+#profile-contents {
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.5), 0 0 0 1px rgba(10,10,10,.02) !important;
+  margin: 0 auto;
+  width: 80vw;
+  text-align: center;
+}
+
+#profile-info {
+  margin: 0px !important;
+}
+
+#friend-request-btn {
+  margin: 0;
 }
 
 #profile-update-title {
@@ -139,6 +236,10 @@
   .single-user {
     height: 152px;
   }
+
+  .s-u-main {
+    height: 82px;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -163,5 +264,92 @@
   .two-field-lines > div {
     float: none;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .profile-email {
+    font-size: 20px;  
+  }
+  
+  .profile-first-name {
+    font-size: 40px;
+  }
+  
+  .profile-first-name, .profile-last-name, .profile-username, .profile-email {
+    position: static;
+  }
+  
+  .profile-header {
+    width: 80%;
+    padding: 240px 20px 20px 20px;
+    text-align: center;
+  }
+  
+  .profile-last-name {
+    font-size: 40px;
+  }
+  
+  .profile-picture, .profile-picture-missing {
+    max-height: 200px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+  
+  .profile-username {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profile-email {
+    font-size: 16px;  
+  }
+  
+  .profile-first-name {
+    font-size: 30px;
+  }
+  
+  .profile-header {
+    padding: 230px 20px 20px 20px;
+    height: 385px;
+    width: 95%;
+  }
+  
+  .profile-last-name {
+    font-size: 30px;
+  }
+  
+  .profile-username {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .profile-email {
+    font-size: 13px;  
+  }
+  
+  .profile-first-name {
+    font-size: 30px;
+  }
+  
+  .profile-header {
+    padding: 180px 20px 20px 20px;
+    height: 330px;
+    width: 95%;
+  }
+  
+  .profile-last-name {
+    font-size: 30px;
+  }
+
+  .profile-picture, .profile-picture-missing {
+    max-height: 150px;
+  }
+  
+  .profile-username {
+    font-size: 16px;
   }
 }

@@ -15,3 +15,91 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+document.addEventListener('turbolinks:load', () => {
+
+  // Get all "navbar-burger" elements
+  const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if (navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+});
+
+
+document.addEventListener('turbolinks:load', () => {
+
+const notes = document.querySelectorAll('.notification');
+
+if (notes.length > 0) {
+
+    notes.forEach( el => {
+      setTimeout(() => {
+        el.style.opacity = 0;
+      }, 2500);
+
+      setTimeout(() => {
+        el.remove()
+      }, 4500);
+    });
+  }
+
+});
+
+
+
+document.addEventListener('turbolinks:load', () => {
+
+const openers = Array.prototype.slice.call(document.querySelectorAll('.opener'), 0);
+
+if (openers.length > 0) {
+
+  // Add a click event on each of them
+  openers.forEach( el => {
+    el.addEventListener('click', () => {
+
+      el.classList.add('hidden-content');
+      el.nextElementSibling.classList.remove('hidden-content');
+
+    });
+  });
+}
+});
+
+
+
+
+
+document.addEventListener('turbolinks:load', () => {
+
+const dismissers = Array.prototype.slice.call(document.querySelectorAll('.dismiss'), 0);
+
+if (dismissers.length > 0) {
+
+  // Add a click event on each of them
+  dismissers.forEach( el => {
+    el.addEventListener('click', () => {
+
+      setTimeout(() => {
+        el.parentNode.remove()
+      }, 500);
+
+    });
+  });
+}
+});
