@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  # devise_scope :user do
-  #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-  # end
-  
   devise_scope :user do
     authenticated  do
       root to: 'posts#index'
@@ -15,7 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # root "posts#index"
   resources :users, only: [:show, :index, :edit]
   resources :posts, only: [:index, :show, :new, :create, :destroy]
   resources :friendships, only: [:update, :create, :destroy]

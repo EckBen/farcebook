@@ -1,24 +1,7 @@
-# README
+# Farcebook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Facebook-like social media page. It was modeled after Facebook both in design and function. I used Ruby on Rails and CSS with a few minor Javascript elemtents to create this application.
 
-Things you may want to cover:
+### Future Directions
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+In time, I plan to add some more Javascript elements to the page to make it function more smoothly. I also plan to add functionality to upload pictures instead of links for both profile pictures and picture posts.

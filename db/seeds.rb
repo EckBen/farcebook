@@ -242,7 +242,3 @@ jesus.likes.create(likeable_type: "Comment", likeable_id: 8)
 jesus.likes.create(likeable_type: "Comment", likeable_id: 9)
 jesus.likes.create(likeable_type: "Comment", likeable_id: 10)
 jesus.likes.create(likeable_type: "Comment", likeable_id: 11)
-
-
-#### Next step would be to write tests to make sure I can access all this data through associations
-#### Also write tests to make sure record creation works properly since this is all hard coded

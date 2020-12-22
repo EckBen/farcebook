@@ -219,6 +219,34 @@
   text-align: center;
 }
 
+@media screen and (max-width: 370px) {
+  .profile-email {
+    font-size: 13px;  
+  }
+  
+  .profile-first-name {
+    font-size: 30px;
+  }
+  
+  .profile-header {
+    padding: 180px 20px 20px 20px;
+    height: 330px;
+    width: 95%;
+  }
+  
+  .profile-last-name {
+    font-size: 30px;
+  }
+
+  .profile-picture, .profile-picture-missing {
+    max-height: 150px;
+  }
+  
+  .profile-username {
+    font-size: 16px;
+  }
+}
+
 @media screen and (max-width: 380px) {
   .person-info-text {
     display: inline-block;
@@ -239,6 +267,30 @@
 
   .s-u-main {
     height: 82px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profile-email {
+    font-size: 16px;  
+  }
+  
+  .profile-first-name {
+    font-size: 30px;
+  }
+  
+  .profile-header {
+    padding: 230px 20px 20px 20px;
+    height: 385px;
+    width: 95%;
+  }
+  
+  .profile-last-name {
+    font-size: 30px;
+  }
+  
+  .profile-username {
+    font-size: 16px;
   }
 }
 
@@ -299,57 +351,5 @@
   
   .profile-username {
     font-size: 20px;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .profile-email {
-    font-size: 16px;  
-  }
-  
-  .profile-first-name {
-    font-size: 30px;
-  }
-  
-  .profile-header {
-    padding: 230px 20px 20px 20px;
-    height: 385px;
-    width: 95%;
-  }
-  
-  .profile-last-name {
-    font-size: 30px;
-  }
-  
-  .profile-username {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .profile-email {
-    font-size: 13px;  
-  }
-  
-  .profile-first-name {
-    font-size: 30px;
-  }
-  
-  .profile-header {
-    padding: 180px 20px 20px 20px;
-    height: 330px;
-    width: 95%;
-  }
-  
-  .profile-last-name {
-    font-size: 30px;
-  }
-
-  .profile-picture, .profile-picture-missing {
-    max-height: 150px;
-  }
-  
-  .profile-username {
-    font-size: 16px;
   }
 }

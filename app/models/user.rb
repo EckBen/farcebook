@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :confirmable, :lockable,
          :recoverable, :rememberable, :validatable,
@@ -22,6 +20,51 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :username, presence: true
 
+  def can_like(likeable)
+    existing_like = Like.where("user_id = ? AND likeable_type = ? AND likeable_id = ?", self.id, likeable.class.name, likeable.id)
+
+    if !existing_like.empty? || likeable.user.id == self.id
+      return false
+    else
+      return true
+    end
+  end
+  
+  def content
+    t_posts = self.text_posts.to_a
+    p_posts = self.picture_posts.to_a
+    comments = self.comments.map do |c|
+      while c.commentable_type == "Comment"
+        c = c.commentable
+      end
+      c.commentable
+    end
+
+    t_posts.concat p_posts
+    t_posts.concat comments
+    return t_posts.sort_by { |item| item.created_at }
+  end
+
+  def list_of_friends(status = false)
+    (status == "pending") ? true : false
+
+    friend_list = self.friendships.where(pending: status).map {|f| f.friend}
+
+    self.rec_friendships.where(pending: status).each do |friend|
+      friend_list.push(friend.user)
+    end
+
+    return friend_list.sort_by {|friend| friend.first_name}
+  end
+
+  def list_of_rec_requests
+    self.rec_friendships.where(pending: true).to_a
+  end
+
+  def remember_me
+    (super == nil) ? true : super
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -41,20 +84,22 @@ class User < ApplicationRecord
     end
   end
 
-  def list_of_friends(status = false)
-    (status == "pending") ? true : false
+  def unseen_likes_comments
+    my_comments = self.comments.map {|c| c.id }
+    my_text_posts = self.text_posts.map {|p| p.id}
+    my_pic_posts = self.picture_posts.map {|p| p.id}
 
-    friend_list = self.friendships.where(pending: status).map {|f| f.friend}
+    unseen_likes = Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "TextPost", my_text_posts)
+                       .or(Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "PicturePost", my_pic_posts))
+                       .or(Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "Comment", my_comments))
 
-    self.rec_friendships.where(pending: status).each do |friend|
-      friend_list.push(friend.user)
-    end
+    unseen_comments = Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "TextPost", my_text_posts)
+                             .or(Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "PicturePost", my_pic_posts))
+                             .or(Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "Comment", my_comments))
 
-    return friend_list.sort_by {|friend| friend.first_name}
-  end
+    unseen_activity = unseen_likes.to_a + unseen_comments.to_a
 
-  def list_of_rec_requests
-    self.rec_friendships.where(pending: true).to_a
+    return unseen_activity.sort_by { |a| a.created_at }
   end
 
   def viewable_content
@@ -67,47 +112,5 @@ class User < ApplicationRecord
     content.concat pics_content
 
     return (content.sort_by {|post| post.created_at}).reverse
-  end
-
-  def remember_me
-    (super == nil) ? true : super
-  end
-
-  def can_like(likeable)
-    existing_like = Like.where("user_id = ? AND likeable_type = ? AND likeable_id = ?", self.id, likeable.class.name, likeable.id)
-
-    if !existing_like.empty? || likeable.user.id == self.id
-      return false
-    else
-      return true
-    end
-  end
-
-  def unseen_likes_comments
-    my_comments = self.comments.map {|c| c.id }
-    my_text_posts = self.text_posts.map {|p| p.id}
-    my_pic_posts = self.picture_posts.map {|p| p.id}
-
-    unseen_likes = Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "TextPost", my_text_posts).or(Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "PicturePost", my_pic_posts)).or(Like.where("seen = false AND likeable_type = ? AND likeable_id IN (?)", "Comment", my_comments))
-    unseen_comments = Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "TextPost", my_text_posts).or(Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "PicturePost", my_pic_posts)).or(Comment.where("seen = false AND commentable_type = ? AND commentable_id IN (?)", "Comment", my_comments))
-
-    unseen_activity = unseen_likes.to_a + unseen_comments.to_a
-
-    return unseen_activity.sort_by { |a| a.created_at }
-  end
-
-  def content
-    t_posts = self.text_posts.to_a
-    p_posts = self.picture_posts.to_a
-    comments = self.comments.map do |c|
-      while c.commentable_type == "Comment"
-        c = c.commentable
-      end
-      c.commentable
-    end
-
-    t_posts.concat p_posts
-    t_posts.concat comments
-    return t_posts.sort_by { |item| item.created_at }
   end
 end

@@ -14,23 +14,8 @@
  *= require_self
  */
 
-
 @import 'bulma';
 @import 'font-awesome';
-
-// ::-webkit-scrollbar {
-//   width: 0px;
-//   background: transparent;
-// }
-
-#notification-menu::-webkit-scrollbar, .navbar-end::-webkit-scrollbar {
-  display: none;
-}
-
-#notification-menu, .navbar-end {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
 header {
   position: fixed;
@@ -228,6 +213,15 @@ header {
   min-width: 400px;
 }
 
+#notification-menu::-webkit-scrollbar, .navbar-end::-webkit-scrollbar {
+  display: none;
+}
+
+#notification-menu, .navbar-end {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @media screen and (min-width: 1024px) {
   #notification-menu {
     max-height: 90vh;
@@ -316,11 +310,3 @@ header {
     display: inline;
   }
 }
-
-
-
-
-
-
-
-
