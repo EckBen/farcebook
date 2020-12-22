@@ -34,7 +34,7 @@
             <%= link_to user_path(friend), class: "person-info" do %>
               <div class="user-link">
                 <div class="info-wrapper">
-                  <% if friend.profile && friend.profile.profile_pic_url %>
+                  <% if friend.profile && friend.profile.profile_pic_url && friend.profile.profile_pic_url != "" %>
                     <img src="<%= friend.profile.profile_pic_url %>" alt="" class="thumbnail">
                   <% else %>
                     <img src="<%= image_path('no_profile_pic_60x60.png') %>" alt="" class="thumbnail">

@@ -1,7 +1,20 @@
 <div class="comment-container">
   <div class="comment-top">
     <div class="comment-username">
-      <%= link_to main_comment.user.username, user_path(main_comment.user) %>
+      <%= link_to user_path(main_comment.user) do %>
+        <div class="user-comm">
+          <div class="user-pic-comm">
+            <% if main_comment.user.profile && main_comment.user.profile.profile_pic_url && main_comment.user.profile.profile_pic_url != "" %>
+              <img src="<%= main_comment.user.profile.profile_pic_url %>" alt="" class="thumbnail">
+            <% else %>
+              <img src="<%= image_path('no_profile_pic_60x60.png') %>" alt="" class="thumbnail">
+            <% end %>
+          </div>
+          <div class="user-name-comm">
+            <%= main_comment.user.username %>
+          </div>
+        </div>
+      <% end %>
 
       <% if current_user.id == main_comment.user_id %>
         <%= link_to fa_icon('trash'),

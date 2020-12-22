@@ -44,12 +44,31 @@
 
 <div id="spacer">
   <div id="comment-contents" class="box">
-    <div id="comment-header" class="columns is-mobile is-centered">
-      <div class="column subtitle is-5 comment-header-label">
+    <div id="comment-header">
+      <div class="subtitle is-5 comment-header-label-comm">
         <span id="comment-count">Comments:</span>
         <span id="count"></span>
       </div>
-      <div class="column subtitle is-5 comment-header-label">
+
+      <div class="user-details">
+        <%= link_to user_path(@post.user) do %>
+          <div>
+            <div class="user-pic">
+              <% if @post.user.profile && @post.user.profile.profile_pic_url && @post.user.profile.profile_pic_url != "" %>
+                <img src="<%= @post.user.profile.profile_pic_url %>" alt="" class="thumbnail">
+              <% else %>
+                <img src="<%= image_path('no_profile_pic_60x60.png') %>" alt="" class="thumbnail">
+              <% end %>
+            </div>
+  
+            <div class="username-header">
+              <%= @post.user.username %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="subtitle is-5 comment-header-label-like">
         <span id="likes-count">Likes:</span>
         <span><%= @post.likes.count %></span>
       </div>

@@ -167,6 +167,10 @@
   padding-bottom: 5px;
 }
 
+.user-float {
+  width: fit-content;
+}
+
 .user-index-page-btns {
   border: none !important;
   border-radius: 6px !important;
@@ -219,106 +223,6 @@
   text-align: center;
 }
 
-@media screen and (max-width: 370px) {
-  .profile-email {
-    font-size: 13px;  
-  }
-  
-  .profile-first-name {
-    font-size: 30px;
-  }
-  
-  .profile-header {
-    padding: 180px 20px 20px 20px;
-    height: 330px;
-    width: 95%;
-  }
-  
-  .profile-last-name {
-    font-size: 30px;
-  }
-
-  .profile-picture, .profile-picture-missing {
-    max-height: 150px;
-  }
-  
-  .profile-username {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 380px) {
-  .person-info-text {
-    display: inline-block;
-  }
-
-  .info-wrapper {
-    display: table;
-    margin: 0 auto;
-  }
-
-  .link-wrapper {
-    top: 76px;
-    left: calc(48% - 70px);
-  }
-  .single-user {
-    height: 152px;
-  }
-
-  .s-u-main {
-    height: 82px;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .profile-email {
-    font-size: 16px;  
-  }
-  
-  .profile-first-name {
-    font-size: 30px;
-  }
-  
-  .profile-header {
-    padding: 230px 20px 20px 20px;
-    height: 385px;
-    width: 95%;
-  }
-  
-  .profile-last-name {
-    font-size: 30px;
-  }
-  
-  .profile-username {
-    font-size: 16px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .profile-update-box {
-    max-width: calc(100% - 30px) !important;
-    margin: 0px 15px !important;
-  }
-
-  .profile-update-wrapper {
-    padding-bottom: 15px;
-    margin-top: 10px;
-  }
-
-  .right-gets-padded {
-    padding-left: 0px !important;
-  }
-
-  .two-field-lines {
-    height: 188px;
-  }
-
-  .two-field-lines > div {
-    float: none;
-    width: 100%;
-  }
-}
-
 @media screen and (max-width: 1200px) {
   .profile-email {
     font-size: 20px;  
@@ -351,5 +255,105 @@
   
   .profile-username {
     font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile-update-box {
+    max-width: calc(100% - 30px) !important;
+    margin: 0px 15px !important;
+  }
+
+  .profile-update-wrapper {
+    padding-bottom: 15px;
+    margin-top: 10px;
+  }
+
+  .right-gets-padded {
+    padding-left: 0px !important;
+  }
+
+  .two-field-lines {
+    height: 188px;
+  }
+
+  .two-field-lines > div {
+    float: none;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .profile-email {
+    font-size: 16px;  
+  }
+  
+  .profile-first-name {
+    font-size: 30px;
+  }
+  
+  .profile-header {
+    padding: 230px 20px 20px 20px;
+    height: 385px;
+    width: 95%;
+  }
+  
+  .profile-last-name {
+    font-size: 30px;
+  }
+  
+  .profile-username {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .person-info-text {
+    display: inline-block;
+  }
+
+  .info-wrapper {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .link-wrapper {
+    top: 76px;
+    left: calc(48% - 70px);
+  }
+  .single-user {
+    height: 152px;
+  }
+
+  .s-u-main {
+    height: 82px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .profile-email {
+    font-size: 13px;  
+  }
+  
+  .profile-first-name {
+    font-size: 30px;
+  }
+  
+  .profile-header {
+    padding: 180px 20px 20px 20px;
+    height: 330px;
+    width: 95%;
+  }
+  
+  .profile-last-name {
+    font-size: 30px;
+  }
+
+  .profile-picture, .profile-picture-missing {
+    max-height: 150px;
+  }
+  
+  .profile-username {
+    font-size: 16px;
   }
 }

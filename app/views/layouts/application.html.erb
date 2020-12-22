@@ -104,6 +104,15 @@
                     <% if activity.class.name == "Comment" %>
                       <%= link_to notifications_path(:activity => {id: activity.commentable_id, type: activity.commentable_type}) do %>  
                         <div class="notifications-activity">
+                          
+                          <div class="user-pic-nav">
+                            <% if activity.user.profile && activity.user.profile.profile_pic_url && activity.user.profile.profile_pic_url != "" %>
+                              <img src="<%= activity.user.profile.profile_pic_url %>" alt="" class="mini-thumbnail">
+                            <% else %>
+                              <img src="<%= image_path('no_profile_pic_60x60.png') %>" alt="" class="mini-thumbnail">
+                            <% end %>
+                          </div>
+                          
                           <span class="notifications-username"><%= activity.user.username %></span>
 
                           <% if activity.commentable_type == "TextPost" %>
@@ -125,6 +134,14 @@
                     <% else %>
                       <%= link_to notifications_path(:activity => {id: activity.likeable_id, type: activity.likeable_type}) do %>  
                         <div class="notifications-activity">
+                          <div class="user-pic-nav">
+                            <% if activity.user.profile && activity.user.profile.profile_pic_url && activity.user.profile.profile_pic_url != "" %>
+                              <img src="<%= activity.user.profile.profile_pic_url %>" alt="" class="mini-thumbnail">
+                            <% else %>
+                              <img src="<%= image_path('no_profile_pic_60x60.png') %>" alt="" class="mini-thumbnail">
+                            <% end %>
+                          </div>
+
                           <span class="notifications-username"><%= activity.user.username %></span>
 
                           <% if activity.likeable_type == "TextPost" %>

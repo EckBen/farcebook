@@ -25,6 +25,21 @@
   margin-top: 15px;
 }
 
+.comment-header-label-comm, .comment-header-label-like {
+  position: absolute;
+  width: fit-content !important;
+}
+
+.comment-header-label-comm {
+  top: 16px;
+  left: 5%;
+}
+
+.comment-header-label-like {
+  top: 16px;
+  right: 5%;
+}
+
 .comment-section-btn, .submit-post {
   border: none !important;
   font-family: Helvetica, Arial, sans-serif !important;
@@ -45,7 +60,8 @@
 }
 
 .comment-top {
-  height: 24px;
+  height: 60px;
+  margin-bottom: 10px;
 }
 
 .comment-username > a {
@@ -132,6 +148,7 @@
 
 .opener {
   margin-left: 30px;
+  margin-top: 20px;
 }
 
 .opener, .switcher {
@@ -254,6 +271,53 @@
   text-decoration: underline;
 }
 
+.username-header {
+  color: black;
+  text-decoration: underline;
+  float: left;
+  padding: 18px 0px;
+}
+
+.user-comm {
+  height: 60px;
+}
+
+.user-details {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  padding: 10px;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.user-details:hover, .user-comm:hover {
+  background-color: rgb(245, 241, 241);
+  border-radius: 6px;
+}
+
+.user-float-with {
+  float: left;
+}
+
+.user-pic {
+  float: left;
+}
+
+.user-pic-comm {
+  float: left;
+}
+
+.user-name-comm {
+  float: left;
+  text-decoration: underline;
+}
+
+.user-name-comm:hover, .user-comm:hover {
+  color: black !important;
+}
+
 #comment-contents {
   margin: 0 auto;
   width: 75%;
@@ -265,7 +329,9 @@
 
 #comment-header {
   text-align: center;
-  height: 40px !important;
+  height: 70px !important;
+  margin: 0;
+  position: relative;
 }
 
 #comment-like-count {
@@ -376,6 +442,10 @@
     padding-bottom: 15px;
     margin-top: 10px;
   }
+
+  .user-pic-comm {
+    display: none;
+  }
   
   #comment-contents {
     width: 100%;
@@ -389,6 +459,36 @@
 
   #spacer {
     padding-bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .comment-header-label-comm {
+    top: 0px;
+    left: 75px;
+  }
+  
+  .comment-header-label-like {
+    top: 40px;
+    left: 75px;
+  }
+  
+  .username-header {
+    float: none;
+    padding: 18px 0px;
+  }
+  
+  .user-details {
+    width: fit-content;
+    left: -10px;
+    top: -15px;
+    margin: 0;
+  }
+  
+  .user-pic {
+    float: none;
+    width: 60px;
+    margin: 0 auto;
   }
 }
 

@@ -13,7 +13,7 @@
                 <% if user.profile && user.profile.profile_pic_url && user.profile.profile_pic_url != "" %>
                   <img src="<%= user.profile.profile_pic_url %>" alt="" class="thumbnail">
                 <% else %>
-                  <img src="/assets/no_profile_pic_60x60.png" alt="" class="thumbnail">
+                  <img src="<%= image_path('no_profile_pic_60x60.png') %>" alt="" class="thumbnail">
                 <% end %>
     
                 <div class="person-info-text">
