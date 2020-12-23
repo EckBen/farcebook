@@ -33,6 +33,7 @@ gem 'bulma-rails', '~> 0.9.1'
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem "omniauth-facebook"
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+gem 'sendgrid-ruby'
 
 
 group :development, :test do
