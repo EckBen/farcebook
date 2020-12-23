@@ -6,6 +6,8 @@
       </div>
     
       <% @users.each do |user| %>
+        <% next if current_user == user %>
+        
         <div class="single-user">
           <%= link_to user_path(user), class: "person-info" do %>
             <div class="user-link">

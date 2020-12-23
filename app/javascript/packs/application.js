@@ -103,3 +103,40 @@ if (dismissers.length > 0) {
   });
 }
 });
+
+
+
+
+document.addEventListener('turbolinks:load', () => {
+
+const $switchers = Array.prototype.slice.call(document.querySelectorAll('.switcher'), 0);
+
+if ($switchers.length > 0) {
+
+  // Add a click event on each of them
+  $switchers.forEach( el => {
+    el.addEventListener('click', () => {
+
+      const post_wrapper = document.getElementById("post-form-wrapper");
+      var tppb = document.getElementById("text_post_post_body");
+      var pppb = document.getElementById("picture_post_picture_body");
+
+      post_wrapper.firstElementChild.classList.toggle("hidden-content");
+      post_wrapper.lastElementChild.classList.toggle('hidden-content');
+
+      if (el.classList.contains("add-pic")) {
+        pppb.value = tppb.value;
+      } else {
+        tppb.value = pppb.value;
+      }
+
+    });
+  });
+}
+});
+
+
+
+
+var count = document.querySelectorAll('.comment-container').length;
+document.getElementById("count").innerHTML = count;
